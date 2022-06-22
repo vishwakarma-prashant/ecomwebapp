@@ -1,0 +1,19 @@
+.rootcard {
+    background-color: "#2196f3";
+    max-width: 100%;
+    border: 10px solid black;
+}
+
+.mediaimg {
+    flex-grow: 1;
+}
+
+.cardContent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardAction {
+    display: flex;
+    justify-content: flex-end;
+}
