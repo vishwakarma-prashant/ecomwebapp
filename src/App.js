@@ -926,7 +926,7 @@ export const abc = {
 
 function App() {
   const [products, setProducts] = useState([]);
-
+ const [cart ,setCart]=useState({});
 
 
    const fetchProduct = async () => {
