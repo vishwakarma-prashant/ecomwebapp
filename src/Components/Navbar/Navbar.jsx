@@ -6,7 +6,7 @@ import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import "./styles.css"
 
-const Navbar = () => {
+const Navbar = ({totalItem}) => {
   return (
     <>
       <AppBar position="fixed" color="inherit" className="appbar">
@@ -18,7 +18,7 @@ const Navbar = () => {
           <div className="grow"/>
           <div className="button">
             <IconButton>
-              <Badge badgeContent={4} color="primary">
+              <Badge badgeContent={totalItem} color="primary">
                 <ShoppingCart />
               </Badge>
             </IconButton>

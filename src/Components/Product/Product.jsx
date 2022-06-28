@@ -10,7 +10,7 @@ import { IconButton } from "@mui/material";
 import AddShoppingCart from "@mui/icons-material/AddShoppingCart";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-const Product = ({ prod}) => {
+const Product = ({ prod ,onAddToCart}) => {
 
 
   
@@ -38,7 +38,9 @@ return (
 
 
     </CardContent>
-    <CardActions className="cardAction">
+    <CardActions className="cardAction" onClick={()=>{
+      onAddToCart(prod.id ,1)
+    }}>
       <IconButton aria-label="Add to cart">
           <AddShoppingCart/>
       </IconButton>

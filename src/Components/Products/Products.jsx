@@ -5,7 +5,7 @@ import "./Products.css";
 
 
 
-const Products = ({ products }) => {
+const Products = ({ products ,onAddToCart}) => {
 
   
   console.log("in products");
@@ -20,7 +20,7 @@ return(
        {products.map((prod) => (
         
         <Grid key={prod.id} item xs={12} sm={6} md={4} lg={3}>
-          <Product prod={prod}  />
+          <Product prod={prod}  onAddToCart={onAddToCart} />
          
         </Grid>
       ))} 
