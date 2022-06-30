@@ -5,7 +5,9 @@ import "./Products.css";
 
 
 
-const Products = ({ products ,onAddToCart}) => {
+const Products = ({ products ,onAddToCart ,           handelUpdateCartQuant,
+  handelRemovefromCart   ,
+  handelEmptyCart          }) => {
 
   
   console.log("in products");

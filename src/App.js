@@ -941,9 +941,32 @@ function App() {
     setCart(await commerce.cart.retrieve());
 
   };
+  const handelRefresh = async()=>{
+  
+     const {item}=  await commerce.cart.refresh();
+    console.log("yes this is cart" +cart)
+
+     setCart(item)
+  }
   
   const handelAddToCart= async(productId,quantity)=>{
     const item =await commerce.cart.add(productId ,quantity);
+    setCart(item.cart)
+  }
+  const handelUpdateCartQuant = async(productId, quantity) =>{
+    const item= await commerce.cart.update(productId, {quantity});
+
+    setCart(item.cart)
+  }
+  const handelRemovefromCart = async(productId) =>{
+    const item= await commerce.cart.remove(productId);
+
+    setCart(item.cart)
+  }
+
+  const handelEmptyCart = async() =>{
+    const item= await commerce.cart.empty();
+
     setCart(item.cart)
   }
 
@@ -951,36 +974,51 @@ function App() {
   useEffect(() => {
     fetchProduct();
     fetchCart();
+    console.log("refreshing")
   }, []);
 
   console.log(products);
   console.log(cart)
-
+  //console.log(cart.total_items)
+  
+  
+ 
   return (
-    <BrowserRouter>
+    <BrowserRouter >
 
 
-    <div>
-      <Navbar totalItem={cart.total_items}/>
-        <Routes>
+    {/* */}
+    <Navbar  totalItem={cart.total_items ? cart.total_items : 0 } />
+      <Routes>
 
-        <Route path="/"  element={
-        <Products products={products} onAddToCart={handelAddToCart} /> 
-
-        }/>
-
-       
-          <Route path="/cart" element={<Cart cart={cart} />}/>
-          
+      <Route path="/"  element={
+      <Products products={products} onAddToCart={handelAddToCart} 
+   
       
-          
+      
+      /> 
 
-        </Routes>
+      }/>
 
+     
+        <Route path="/cart" element={<Cart cart={cart} 
+          handelUpdateCartQuant    ={handelUpdateCartQuant}
+          handelRemovefromCart      ={ handelRemovefromCart} 
+          handelEmptyCart             ={     handelEmptyCart } 
+          handelRefresh={handelRefresh}/>}/>
+        
     
         
-    </div>
-    </BrowserRouter>
+
+      </Routes>
+
+  
+      
+  
+  
+  </BrowserRouter>
+    
+  
   );
 }
 

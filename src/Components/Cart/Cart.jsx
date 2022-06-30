@@ -5,11 +5,19 @@ import "./Cart.css"
 import CartItem from "./CartItem/CartItem";
 import {Link} from "react-router-dom"
 
-const Cart =({cart})=>{
-    const isEmpty=cart.line_items===0;
+const Cart =({cart    ,onAddToCart ,      handelRefresh   ,  handelUpdateCartQuant,
+    handelRemovefromCart   ,
+    handelEmptyCart     })=>{
+
+
+    const isEmpty= cart ? (cart.total_items ===0) : false ;
+
+
+
+    console.log(cart.line_items)
     const EmptyCart=()=>{
         return(<div> 
-            <h1>Hello</h1>
+           
 
             <Typography variant="subtitle2" component={Link} to="/">Cart is empty</Typography>
 
@@ -26,8 +34,11 @@ const Cart =({cart})=>{
             <>
             <Grid container spacing={3}>
                 {cart.line_items?.map((item)=>(
-                    <Grid item xs={12} sm={4} key={item.id}>
-                        <CartItem   item={item}/>
+                    <Grid item xs={12} sm={4}  key={item.id}>
+                        <CartItem   item={item}   
+                         handelUpdateCartQuant ={  handelUpdateCartQuant} 
+                         handelRemovefromCart  ={  handelRemovefromCart }
+                         handelRefresh={handelRefresh} />
                     </Grid>
                 )
                 
@@ -35,19 +46,22 @@ const Cart =({cart})=>{
 
                  </Grid>
                  <div className="cartDetails">
-                    <Typography variant="h3">
+                    <Typography variant="h5">
                         Subtotal :{subtotal}
                     </Typography>
-                    <Stack direction="row" spacing={2}>
+                    <div>
+
+                    <Stack direction="row" spacing={2} >
                    
 
-                    <Button className="emptycart btnbtn" size="large" type="button" variant="contained" color="secondary" >Empty cart</Button>
+                    <Button className="emptycart btnbtn" size="large" type="button" variant="contained" color="secondary" onClick={ handelEmptyCart  } >Empty cart</Button>
                     
                   
 
                     <Button className="checkout btnbtn" size="large" type="button" variant="contained" color="primary" >Checkout</Button>
                  
                     </Stack>
+                    </div>
                  </div>
                 </>
         ) 
