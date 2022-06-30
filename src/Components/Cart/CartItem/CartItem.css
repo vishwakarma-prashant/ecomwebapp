@@ -1,0 +1,21 @@
+.cardmedia {
+    height: 260px;
+}
+
+.cardContent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardAction {
+    justify-content: space-between;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+}
+
+.quantity {
+    padding: 10px;
+}
