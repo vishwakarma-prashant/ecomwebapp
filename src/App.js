@@ -1,9 +1,12 @@
 import "./App.css";
-import { Products, Navbar } from "./Components";
+import { Products, Navbar ,Cart } from "./Components";
 import { useState } from "react";
 import { commerce } from "./lib/commerce";
 import { useEffect } from "react";
 import Product from "./Components/Product/Product";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+
 
 // export const abc = {
 //   "data": [{
@@ -954,10 +957,30 @@ function App() {
   console.log(cart)
 
   return (
+    <BrowserRouter>
+
+
     <div>
       <Navbar totalItem={cart.total_items}/>
-      <Products products={products} onAddToCart={handelAddToCart} />
+        <Routes>
+
+        <Route path="/"  element={
+        <Products products={products} onAddToCart={handelAddToCart} /> 
+
+        }/>
+
+       
+          <Route path="/cart" element={<Cart cart={cart} />}/>
+          
+      
+          
+
+        </Routes>
+
+    
+        
     </div>
+    </BrowserRouter>
   );
 }
 
