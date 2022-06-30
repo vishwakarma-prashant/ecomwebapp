@@ -50,7 +50,6 @@ const CartItem = ({
             <IconButton
               onClick={() => {
                 handelUpdateCartQuant(item.id, item.quantity -1);
-                handelRefresh();
               }}
             >
               <RemoveOutlinedIcon />

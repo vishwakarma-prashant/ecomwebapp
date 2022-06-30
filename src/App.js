@@ -1,12 +1,10 @@
 import "./App.css";
-import { Products, Navbar ,Cart } from "./Components";
+import { Products, Navbar, Cart } from "./Components";
 import { useState } from "react";
 import { commerce } from "./lib/commerce";
 import { useEffect } from "react";
 import Product from "./Components/Product/Product";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-
 
 // export const abc = {
 //   "data": [{
@@ -939,92 +937,80 @@ function App() {
 
   const fetchCart = async () => {
     setCart(await commerce.cart.retrieve());
-
   };
-  const handelRefresh = async()=>{
-  
-     const {item}=  await commerce.cart.refresh();
-    console.log("yes this is cart" +cart)
+  const handelRefresh = async () => {
+    const { item } = await commerce.cart.refresh();
+    console.log("yes this is cart" + cart);
 
-     setCart(item)
-  }
-  
-  const handelAddToCart= async(productId,quantity)=>{
-    const item =await commerce.cart.add(productId ,quantity);
-    setCart(item.cart)
-  }
-  const handelUpdateCartQuant = async(productId, quantity) =>{
-    const item= await commerce.cart.update(productId, {quantity});
+    setCart(item);
+  };
 
-    setCart(item.cart)
-  }
-  const handelRemovefromCart = async(productId) =>{
-    const item= await commerce.cart.remove(productId);
+  const handelAddToCart = async (productId, quantity) => {
+    const item = await commerce.cart.add(productId, quantity);
+    setCart(item.cart);
+  };
+  const handelUpdateCartQuant = async (productId, quantity) => {
+    const item = await commerce.cart.update(productId, { quantity });
 
-    setCart(item.cart)
-  }
+    setCart(item.cart);
+  };
+  const handelRemovefromCart = async (productId) => {
+    const item = await commerce.cart.remove(productId);
 
-  const handelEmptyCart = async() =>{
-    const item= await commerce.cart.empty();
+    setCart(item.cart);
+  };
 
-    setCart(item.cart)
-  }
+  const handelEmptyCart = async () => {
+    const item = await commerce.cart.empty();
 
+    setCart(item.cart);
+  };
 
   useEffect(() => {
     fetchProduct();
     fetchCart();
-    console.log("refreshing")
+    console.log("refreshing");
   }, []);
 
   console.log(products);
-  console.log(cart)
+  console.log(cart);
   //console.log(cart.total_items)
+
+  return (<div> 
+
   
-  
- 
-  return (
-    <BrowserRouter >
+      {/* */}
+      <Navbar totalItem={cart.total_items ? cart.total_items : 0} />
 
 
-    {/* */}
-    <Navbar  totalItem={cart.total_items ? cart.total_items : 0 } />
-    <Products products={products} onAddToCart={handelAddToCart} 
-   
-      
-      
-   /> 
-    
       <Routes>
+      <Route
+          path="/"
+          element={
+            <Products products={products} onAddToCart={handelAddToCart} />
+          }
+        />
+        <Route
+          path="/ecomwebapp"
+          element={
+            <Products products={products} onAddToCart={handelAddToCart} />
+          }
+        />
 
-      <Route path="/"  element={
-      <Products products={products} onAddToCart={handelAddToCart} 
-   
-      
-      
-      /> 
-
-      }/>
-
-     
-        <Route path="/cart" element={<Cart cart={cart} 
-          handelUpdateCartQuant    ={handelUpdateCartQuant}
-          handelRemovefromCart      ={ handelRemovefromCart} 
-          handelEmptyCart             ={     handelEmptyCart } 
-          handelRefresh={handelRefresh}/>}/>
-        
-    
-        
-
+        <Route
+          path="/cart"
+          element={
+            <Cart
+            cart={cart}
+            handelUpdateCartQuant={handelUpdateCartQuant}
+            handelRemovefromCart={handelRemovefromCart}
+            handelEmptyCart={handelEmptyCart}
+            handelRefresh={handelRefresh}
+            />
+          }
+          />
       </Routes>
-
-  
-      
-  
-  
-  </BrowserRouter>
-    
-  
+          </div>
   );
 }
 
