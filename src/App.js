@@ -989,6 +989,12 @@ function App() {
 
     {/* */}
     <Navbar  totalItem={cart.total_items ? cart.total_items : 0 } />
+    <Products products={products} onAddToCart={handelAddToCart} 
+   
+      
+      
+   /> 
+    
       <Routes>
 
       <Route path="/"  element={
