@@ -5,6 +5,7 @@ import { commerce } from "./lib/commerce";
 import { useEffect } from "react";
 import Product from "./Components/Product/Product";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CssBaseline } from "@mui/material";
 
 // export const abc = {
 //   "data": [{
@@ -939,10 +940,10 @@ function App() {
     setCart(await commerce.cart.retrieve());
   };
   const handelRefresh = async () => {
-    const { item } = await commerce.cart.refresh();
+    const newCart = await commerce.cart.refresh();
     console.log("yes this is cart" + cart);
 
-    setCart(item);
+    setCart(newCart);
   };
 
   const handelAddToCart = async (productId, quantity) => {
@@ -978,6 +979,7 @@ function App() {
 
   return (
     <div>
+      <CssBaseline/>
       {/* */}
       <Navbar totalItem={cart.total_items ? cart.total_items : 0}  />
 
@@ -1007,7 +1009,7 @@ function App() {
             />
           }
         />
-        <Route path="/checkout" element={<Checkout cart={cart} />} />
+        <Route path="/checkout" element={<Checkout cart={cart}  handelRefresh={handelRefresh} />} />
       </Routes>
       <div className="bottom">
 

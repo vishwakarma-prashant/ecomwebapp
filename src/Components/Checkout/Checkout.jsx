@@ -1,16 +1,32 @@
-import { Container, Grid, Paper, Step, StepLabel, Stepper, Typography } from '@mui/material'
+import { Button, Container, Grid, Paper, Step, StepLabel, Stepper, Typography } from '@mui/material'
 import {React ,useEffect,useState} from 'react'
 import AddressForm from './AddressForm'
 import PaymentForm from './PaymentForm.jsx'
 import { commerce } from '../../lib/commerce'
 
 import "./Checkout.css"
+import { Link } from 'react-router-dom'
 
 const steps =["Shipping Address" , "Payment Details"]
 
-const Checkout = ({cart}) => {
+const Checkout = ({cart ,handelRefresh}) => {
+
+  
   const Confirmation =() =>{
-    return(<div>Confrim</div>)
+    
+      handelRefresh()
+
+    
+
+    return(<div>
+
+ <h1>Thank you for purchase</h1>   
+      <Button component={Link} to="/" variant='contained'>Home</Button>
+   
+
+
+
+    </div>)
   }
   
   const [activeStep ,setActiveStep]=useState(0);
@@ -41,13 +57,13 @@ const Checkout = ({cart}) => {
     genrateToken();
   
     
-  }, [])
+  }, [cart])
   
 
   console.log("the checkout token in checkout.jsx",checkoutToken)
   console.log("the checkout token id in checkout.jsx  checkoutToken.id ",checkoutToken.id)
 
-  const nextStep = ()=> setActiveStep((priviousStep)=>(priviousStep + 1))
+  const nextStep = ()=> setActiveStep((priviousStep)=>(priviousStep + 1 ))
   const backStep = ()=>  setActiveStep((priviousStep)=>(priviousStep - 1))
 
   const next= (data)=>{
@@ -64,7 +80,7 @@ const Checkout = ({cart}) => {
   
 
 
-  const Form =()=> { return (activeStep ===0 ? <AddressForm checkoutToken={checkoutToken} next={next} /> : <PaymentForm checkoutToken={checkoutToken} /> )}
+  const Form =()=> { return (activeStep ===0 ? <AddressForm checkoutToken={checkoutToken} next={next} /> : <PaymentForm handelRefresh={handelRefresh} checkoutToken={checkoutToken} backStep={backStep} nextStep={nextStep} /> )}
 
 
 
