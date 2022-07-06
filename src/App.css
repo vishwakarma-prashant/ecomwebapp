@@ -1,5 +1,10 @@
 .header {}
 
-.body {
-    margin-top: 50px;
+body {
+    margin: 0px;
+    padding: 4px;
+}
+
+.bottom {
+    padding: 30px
 }

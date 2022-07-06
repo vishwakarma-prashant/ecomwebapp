@@ -10,7 +10,7 @@ const Products = ({ products ,onAddToCart ,           handelUpdateCartQuant,
   handelEmptyCart          }) => {
 
   
-  console.log("in products");
+  console.log("in products.jsx");
 
 
    

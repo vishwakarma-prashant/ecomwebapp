@@ -1,5 +1,5 @@
 import "./App.css";
-import { Products, Navbar, Cart } from "./Components";
+import { Products, Navbar, Cart, Checkout } from "./Components";
 import { useState } from "react";
 import { commerce } from "./lib/commerce";
 import { useEffect } from "react";
@@ -976,18 +976,16 @@ function App() {
   console.log(cart);
   //console.log(cart.total_items)
 
-  return (<div> 
-
-  
+  return (
+    <div>
       {/* */}
-      <Navbar totalItem={cart.total_items ? cart.total_items : 0} />
-
+      <Navbar totalItem={cart.total_items ? cart.total_items : 0}  />
 
       <Routes>
-      <Route
+        <Route
           path="/"
           element={
-            <Products products={products} onAddToCart={handelAddToCart} />
+            <Products products={products} onAddToCart={handelAddToCart}  />
           }
         />
         <Route
@@ -1001,16 +999,20 @@ function App() {
           path="/cart"
           element={
             <Cart
-            cart={cart}
-            handelUpdateCartQuant={handelUpdateCartQuant}
-            handelRemovefromCart={handelRemovefromCart}
-            handelEmptyCart={handelEmptyCart}
-            handelRefresh={handelRefresh}
+              cart={cart}
+              handelUpdateCartQuant={handelUpdateCartQuant}
+              handelRemovefromCart={handelRemovefromCart}
+              handelEmptyCart={handelEmptyCart}
+              handelRefresh={handelRefresh}
             />
           }
-          />
+        />
+        <Route path="/checkout" element={<Checkout cart={cart} />} />
       </Routes>
-          </div>
+      <div className="bottom">
+
+      </div>
+    </div>
   );
 }
 

@@ -14,7 +14,7 @@ const Cart =({cart    ,onAddToCart ,      handelRefresh   ,  handelUpdateCartQua
 
 
 
-    console.log(cart.line_items)
+    console.log("cart.line_items ", cart.line_items)
     const EmptyCart=()=>{
         return(<div> 
            
@@ -51,16 +51,19 @@ const Cart =({cart    ,onAddToCart ,      handelRefresh   ,  handelUpdateCartQua
                     </Typography>
                     <div>
 
-                    <Stack direction="row" spacing={2} >
+                    <Stack direction="row" spacing={2}  >
                    
 
                     <Button className="emptycart btnbtn" size="large" type="button" variant="contained" color="secondary" onClick={ handelEmptyCart  } >Empty cart</Button>
                     
                   
 
-                    <Button className="checkout btnbtn" size="large" type="button" variant="contained" color="primary" >Checkout</Button>
+                    <Button component={Link} to="/checkout" className="checkout btnbtn" size="large" type="button" variant="contained" color="primary"  >Checkout</Button>
                  
                     </Stack>
+                    <div className="margin-bottom">
+                        
+                    </div>
                     </div>
                  </div>
                 </>

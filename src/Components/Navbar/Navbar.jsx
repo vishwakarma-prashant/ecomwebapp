@@ -10,7 +10,7 @@ import "./styles.css"
 const Navbar = ({totalItem}) => {
   return (
     <>
-      <AppBar position="fixed" color="inherit" className="appbar">
+      <AppBar position="static" color="inherit" className="appbar " >
         <Toolbar className="toolbar">
           <Typography variant="h6" color="inherit" className="title"  component={Link} to ="/">
        
